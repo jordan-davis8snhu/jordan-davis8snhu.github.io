@@ -44,6 +44,8 @@ enhancements all come together to complete the functionality of the project and 
 enhancements together show my ability as a developer to grasp the different aspects of software development and bring them together into 
 one functional project to display my skills.
 
+## Code Review
+
 ## Enhancement 1
 
 _1. Briefly describe the artifact. What is it? When was it created?_
@@ -118,3 +120,4 @@ _4. Reflect on the process of enhancing and/or modifying the artifact. What did 
 
 My last two enhancements demonstrated my ability to code, and in this enhancement, I demonstrated my knowledge of database principles and mysql syntax. In the process of creating this enhancement, I learned a lot about how to analyze and survey an existing project and consider how to integrate new features and services into it. A large part of this enhancement was thinking of how to integrate this functionality smoothly. During this enhancement, I had to do some research into mysql and python interaction, and faced a few challenges with the data structure. There are some further enhancements I could make, but I think the project is in a good place. If I were to work on this further, I would probably convert the project to just be a light mysql wrapper and ignore the file encryption and json writing, but for now I think it works as a good backup storage system.
 
+## Demo

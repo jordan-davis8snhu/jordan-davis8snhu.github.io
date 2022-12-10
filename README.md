@@ -76,6 +76,8 @@ mitigate design flaws, and ensure privacy and enhanced security of data and reso
 
 ## Code Review
 
+## New Artifact
+
 ## Enhancement 1
 
 _1. Briefly describe the artifact. What is it? When was it created?_

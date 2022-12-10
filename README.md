@@ -85,8 +85,84 @@ _1. Briefly describe the artifact. What is it? When was it created?_
 
   The original artifact was a project from CS-340 Client/Server Development. The original artifact was a python script that interacted with mongodb through CRUD operations:
   
-![animalCRUD](https://user-images.githubusercontent.com/73435209/206860424-11ddc750-9821-4b5a-a79b-6ec0de166c36.png)
-![db](https://user-images.githubusercontent.com/73435209/206860552-d7609f7f-4abc-4ab0-a8fe-c3b4f4003143.png)
+```python
+class AnimalShelter(object):
+    """ CRUD operations for Animal collection in MongoDB """
+
+    def __init__(self,user,password):
+        # Initializing the MongoClient. This helps to 
+        # access the MongoDB databases and collections. 
+        self.client = MongoClient('mongodb://%s:%s@localhost:35825'%(user,password))
+        self.database = self.client['AAC']
+
+    # Complete this create method to implement the C in CRUD.
+    def create(self, data):
+        if data is not None:
+            self.database.animals.insert_one(data)  # data should be dictionary
+            print("++++++++++++++++++ animal created successifully+++++++++++++++")
+        else:
+            raise Exception("Nothing to save, because data parameter is empty")
+            
+    # THIS IS A READ METHOD
+    def read(self, data):
+        if data is not None:
+            data = self.database.animals.find(data,{"_id":False})  # data should be dictionary   
+            return data
+        else:
+            raise Exception("nothing to read, hint is empty")
+            
+            
+    # this method will receive a dictionry, find all items that matvh the dictionary 
+    #values and delete them
+
+
+    def delete(self, _data):
+        if _data is not None:
+            data = self.read(_data) # checj if animal exists
+            if data is None:
+                print("Animal not found")
+                return
+            #if found delete the animal or animals
+            self.database.animals.delete_many(_data)  # data should be dictionary 
+            data = self.read(_data) #confirm if animal was deleted
+            return data
+        else:
+            raise Exception("nothing to read, hint is empty")
+            
+    # this method update usin the id of the collection, one can also update using any key
+    def update(self, _keys,_data):
+        if _data is not None and _keys is not None:
+            self.database.animals.update_many(_keys,{'$set':_data})  # _keys will check for the doc to update 
+            data = self.read(_data)
+            return data
+        else:
+            raise Exception("please nter both key and data to modify the collection")
+```
+```python
+###########################
+# Data Manipulation / Model
+###########################
+# FIX ME update with your username and password and CRUD Python module name
+
+username = "aacuser"
+password = "aacuser"
+shelter = AnimalShelter(username, password)
+
+
+# class read method must support return of cursor object and accept projection json input
+df = pd.DataFrame.from_records(shelter.read({}))
+
+
+#########################
+# Dashboard Layout / View
+#########################
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']                            
+app = JupyterDash('SNHU CS340')
+
+#FIX ME Add in Grazioso Salvare’s logo
+image_filename = 'GSLogo.png' # replace with your own image
+encoded_image = base64.b64encode(open(image_filename, 'rb').read())
+```
 
   I took the concept of the CRUD operations and database interaction and expanded on the idea to create something like a password locker. The enhanced artifact is based on the CRUD operations. I have based a new application around them in which the user can store username/password combinations and secure them behind a master password. It functions as a command-line program, which is another enhancement on the original artifact. I created this artifact in the last week as an enhancement of the original project. 
 
@@ -94,9 +170,125 @@ _2. Justify the inclusion of the artifact in your ePortfolio. Why did you select
 
   I decided to create and include this project in my ePortfolio because the level of enhancement demonstrates what I have learned about software design in the CS program. The original project was a simple, short script. From that basic functionality I have created a project all of my own with many moving parts and greatly increased functionality. It is a practical, usable program and I have organized it in a professional manner. The artifact also demonstrates my understanding of OOP and modularization of code. Whereas the original project was a single-file script, I now have a full-fledged project that includes multiple directories, function-specific files, a config.py, a master.py and a requirements file. I wrote several classes for this project, containing the appropriate functions, and apply the classes by creating objects and calling the functions. Functions and variables have appropriate and obvious names. Many of the variables are abstracted to the appropriate level and are not hardcoded into the variables themselves. I hardcoded as few things as possible, I think I may have 0 hardcoded values in this project. I have used a config.py and an initialize.py appropriately, which I believe illustrates my understanding of how developers engineer projects to be as modular and configurable as possible:
   
+```python
+# Locker class contains the CRUD functions
+class Locker:
 
-![locker1](https://user-images.githubusercontent.com/73435209/206871168-6075bf27-aea0-4c8c-b4ab-627c1ba3338d.png)
-![locker2](https://user-images.githubusercontent.com/73435209/206871131-bbaff810-5af3-4064-a8d5-2d5091ea427b.png)
+    login_list = []
+
+    def __init__(self, service: str, user: str,  path: str):
+        """
+
+        :param service:
+        :param user: associated user name
+        :param path: password path
+        """
+        self.path = path
+        self.service = service
+        self.user = user
+
+    def get_logins(self):
+        self.login_list = []
+        with open(self.path, 'r') as f:
+            for login in f:
+                self.login_list.append(json.loads(login))
+
+        return self.login_list
+
+    def set_logins(self):
+        with open(self.path, 'w') as f:
+            for d in self.login_list:
+                f.write(json.dumps(dict(d)))
+                f.write('\n')
+
+    def get_login_dict(self):
+        for d in self.login_list:
+            if self.service in d:
+                if self.user in d[self.service]:
+                    return d
+
+    def create(self, db: str, cursor: str, password: str):
+        """
+
+        :param password: associated password
+        :return:
+        """
+        self.get_logins()
+
+        d = self.get_login_dict()
+        if d is not None:
+            response = 'credentials already exist'
+            return response
+        else:
+            login = {
+                self.service: {
+                    self.user: password
+                }
+            }
+            with open(self.path, 'a+') as f:
+                f.write(json.dumps(dict(login)))
+                f.write('\n')
+
+            try:
+                data.insert_data(cursor, db, self.service, self.user, password)
+            except Exception as e:
+                print(e)
+                pass
+
+            response = 'login created'
+            return response
+
+    def read(self):
+        self.get_logins()
+
+        d = self.get_login_dict()
+        if d is None:
+            response = 'credentials invalid'
+            return response
+        else:
+            password = (d[self.service][self.user])
+            return password
+
+    def delete(self, cursor, db):
+        self.get_logins()
+
+        d = self.get_login_dict()
+        if d is None:
+            response = 'credentials invalid'
+            return response
+        else:
+            del(d[self.service])
+            self.set_logins()
+
+            try:
+                data.delete_data(cursor, db, self.service, self.user)
+            except Exception as e:
+                print(e)
+                pass
+
+            response = 'deletion successful'
+            return response
+
+    def update(self, cursor: str, db: str, new_pass: str):
+        """
+
+        :param new_pass: updated password
+        :return:
+        """
+        self.get_logins()
+
+        d = self.get_login_dict()
+        if d is None:
+            response = 'credentials invalid'
+            return response
+        else:
+            d[self.service][self.user] = new_pass
+            self.set_logins()
+
+            data.update_data(cursor, db, self.service, self.user, new_pass)
+            response = 'credentials updated'
+            return response
+```
 
   
   All project-wide variables are configured in the config. This makes the project easily readable and updatable, and the code is easy to follow and understand just by following the workflow through the code. I believe this also benefits the project’s security, since the values are not directly exposed and can be easily updated. Nothing in the code itself exposes the user. Next to all this, I have also successfully converted the project into a command-line application, which can execute a variety of user commands (this is where the CRUD operations come into play). I also did a fair amount of exception handling. I believe this enhancement shows my understanding and ability to apply software design and engineering skills.
@@ -131,7 +323,91 @@ _2.	Justify the inclusion of the artifact in your ePortfolio. Why did you select
 
 I decided to implement an algorithm in this way to demonstrate complex problem-solving skills and an understanding of how to research and implement programming solutions and techniques to solve specific problems/ functionality requirements. The function of the fernet algorithm is central to the project as a whole and solves a unique problem within the project- the security and obscurity of sensitive data. Since the idea was to create a password database, one of the first considerations that comes to mind is how to keep those passwords safe and ideally unreachable to prying eyes. I accomplished combining the use of the algorithm with the design of the project and handling the considerations that come with that. I designed classes and functions around the execution and specific use of the algorithm for my project, demonstrating an understanding of the value and proper use of software tools. The artifact was improved by this enhancement because it fulfills a core functionality requirement of the project. I had to design the code in a way that the user can interact with encrypted data – each time the data is encrypted or reencrypted, a new fernet key is generated by the algorithm. There are many times that I ran into design problems with this feature and locked myself out of the data by mismatching keys. Another algorithmic feature central to the project’s functionality is a simple random character generator.  
 
-![crypto](https://user-images.githubusercontent.com/73435209/206871249-407dc0f4-c3ce-48af-a2ba-a07c4b6edc19.png)
+```python
+# Generate a fernet key
+def gen_key(key_file: str):
+    """
+
+    :param key_file: key path
+    :return:
+    """
+    key = Fernet.generate_key()
+
+    with open(key_file, "wb") as f:
+        f.write(key)
+        f.close()
+
+
+def read_key(key_file: str):
+    """
+
+    :param key_file: key path
+    :return:
+    """
+    with open(key_file, "rb") as f:
+        key = f.read()
+        f.close()
+    return key
+
+
+class Crypto:
+
+    def __init__(self, path: str, key_file: str):
+        """
+
+        :param path: password path
+        :param key_file: key path
+        """
+        self.path = path
+        self.key_file = key_file
+
+    def encrypt(self):
+        gen_key(self.key_file)
+
+        key = read_key(self.key_file)
+
+        with open(self.path, 'rb') as f:
+            data = f.read()
+            f.close()
+
+        k = Fernet(key)
+
+        try:
+            enc_data = k.encrypt(data)
+
+            with open(self.path, 'wb') as f:
+                f.write(enc_data)
+                f.close()
+
+            response = 'file encrypted'
+            return response
+
+        except cryptography.fernet.InvalidToken:
+            response = 'key is invalid'
+            return response
+
+    def decrypt(self):
+
+        key = read_key(self.key_file)
+
+        with open(self.path, 'rb') as f:
+            data = f.read()
+
+        k = Fernet(key)
+
+        try:
+            dec_data = k.decrypt(data)
+
+            with open(self.path, 'wb') as f:
+                f.write(dec_data)
+                f.close()
+            response = 'file decrypted'
+            return response
+
+        except cryptography.fernet.InvalidToken:
+            response = 'key is invalid'
+            return response
+```
 
 _3.	Did you meet the course objectives you planned to meet with this enhancement in Module One? Do you have any updates to your outcome-coverage plans?_
 
@@ -155,7 +431,77 @@ _2.	Justify the inclusion of the artifact in your ePortfolio. Why did you select
 
 The artifact I have chosen to include meets all the course objectives. It uses innovative computer science techniques to solve unique problems, an algorithmic function as a solution to address specific functionality requirements, and includes database interaction to demonstrate the data structure and data manipulation on the backend of the project. The database component of my artifact demonstrates my understanding of database principles and my ability to integrate those principles into a project. It also showcases my ability to research and write code that interacts with an outside service and integrate it into an existing service. Essentially what this enhancement does is interface with the mysql program and creates/updates/deletes entries from a mysql table. The new code creates a database called ‘pylock’ and a table called ‘logins.’ It populates that table with the service, username and password data. It is like a soft mysql wrapper for this specific project. I also wrote a function to read data directly from the mysql table, but did not use it anywhere. You can use it from the python terminal however to read data from the database without having to directly login to mysql. The mysql permissions are set in the config.py.
 
-![databasetools](https://user-images.githubusercontent.com/73435209/206871437-784f52ec-f4ea-4b4c-8106-ca4fbc7a1561.png)
+```python
+def create_db(cursor):
+
+    create = "CREATE DATABASE if not exists pylock;"
+    cursor.execute(create)
+
+
+def drop_db(cursor):
+
+    drop = "DROP DATABASE if exists pylock;"
+    cursor.execute(drop)
+
+
+def create_table(cursor):
+
+    cursor.execute("USE pylock")
+
+    table = "CREATE TABLE passwords ( " \
+            "service  VARCHAR(16) NOT NULL," \
+            "username VARCHAR(32) NOT NULL," \
+            "password VARCHAR(64) NOT NULL)"
+
+    cursor.execute(table)
+    return
+
+
+def insert_data(cursor, db, service, username, password):
+
+    cursor.execute("USE pylock")
+
+    sql = "INSERT INTO passwords (service, username, password) VALUES (%s, %s, %s)"
+    val = (service, username, password)
+
+    cursor.execute(sql, val)
+    db.commit()
+
+
+
+def select_data(cursor, service, username):
+
+    cursor.execute("USE pylock")
+
+    # selecting query
+    query = f"SELECT password FROM passwords WHERE service = '{service}' and username = '{username}'"
+    cursor.execute(query)
+
+    result = cursor.fetchall()
+
+    for x in result:
+        print(x)
+
+
+def update_data(cursor, db, service, username, password):
+
+    cursor.execute("USE pylock")
+
+    # selecting query
+    query = f"UPDATE passwords SET password = '{password}' WHERE service = '{service}' and username = '{username}'"
+    cursor.execute(query)
+    db.commit()
+
+
+def delete_data(cursor, db, service, username):
+
+    cursor.execute("USE pylock")
+
+    # selecting query
+    query = f"DELETE FROM passwords WHERE service = '{service}' and username = '{username}'"
+    cursor.execute(query)
+    db.commit()
+```
 
 _3.	Did you meet the course objectives you planned to meet with this enhancement in Module One? Do you have any updates to your outcome-coverage plans?_
 

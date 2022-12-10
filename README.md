@@ -82,7 +82,11 @@ mitigate design flaws, and ensure privacy and enhanced security of data and reso
 
 _1. Briefly describe the artifact. What is it? When was it created?_
 
-  The original artifact was a project from CS-340 Client/Server Development. The original artifact was a python script that interacted with mongodb through CRUD operations. I took the concept of the CRUD operations and database interaction and expanded on the idea to create something like a password locker. The enhanced artifact is based on the CRUD operations. I have based a new application around them in which the user can store username/password combinations and secure them behind a master password. It functions as a command-line program, which is another enhancement on the original artifact. I created this artifact in the last week as an enhancement of the original project. 
+  The original artifact was a project from CS-340 Client/Server Development. The original artifact was a python script that interacted with mongodb through CRUD operations:
+  
+![animalCRUD](https://user-images.githubusercontent.com/73435209/206860424-11ddc750-9821-4b5a-a79b-6ec0de166c36.png)
+
+  I took the concept of the CRUD operations and database interaction and expanded on the idea to create something like a password locker. The enhanced artifact is based on the CRUD operations. I have based a new application around them in which the user can store username/password combinations and secure them behind a master password. It functions as a command-line program, which is another enhancement on the original artifact. I created this artifact in the last week as an enhancement of the original project. 
 
 _2. Justify the inclusion of the artifact in your ePortfolio. Why did you select this item? What specific components of the artifact showcase your skills and abilities in software development? How was the artifact improved?_
 

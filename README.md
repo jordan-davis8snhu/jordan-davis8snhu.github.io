@@ -77,6 +77,7 @@ mitigate design flaws, and ensure privacy and enhanced security of data and reso
 ## Code Review
 
 ## New Artifact
+[The New Artifact Code](https://github.com/jordan-davis8snhu/CS499_Pylock) (The same artifact is used for all enhancements)
 
 ## Enhancement 1
 

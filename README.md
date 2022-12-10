@@ -44,6 +44,36 @@ enhancements all come together to complete the functionality of the project and 
 enhancements together show my ability as a developer to grasp the different aspects of software development and bring them together into 
 one functional project to display my skills.
 
+  In developing this project I have met the 5 course outcomes of the Capstone course with the following enhancements to the original code, which I explain in further detail in the accompanying narrative sections:
+  
+[CS-499-01] Employ strategies for building collaborative environments that enable diverse audiences to support organizational decision
+making in the field of computer science:
+
+  Enhancement 1
+  
+[CS-499-02] Design, develop, and deliver professional-quality oral, written, and visual communications that are coherent, technically sound,
+and appropriately adapted to specific audiences and contexts:
+
+  Enhancements 1 and 2
+  
+[CS-499-03] Design and evaluate computing solutions that solve a given problem using algorithmic principles and computer science practices and
+standards appropriate to its solution, while managing the trade-offs involved in design choices (data structures and algorithms):
+
+  Enhancement 2
+  
+[CS-499-04] Demonstrate an ability to use well-founded and innovative techniques, skills, and tools in computing practices for the purpose of
+implementing computer solutions that deliver value and accomplish industry-specific goals (software engineering/design/database):
+  
+  Enhancement 3
+  
+[CS-499-05] Develop a security mindset that anticipates adversarial exploits in software architecture and designs to expose potential vulnerabilities,
+mitigate design flaws, and ensure privacy and enhanced security of data and resources:
+  
+  Enhancements 1 and 2
+  
+  
+## Original Code
+
 ## Code Review
 
 ## Enhancement 1

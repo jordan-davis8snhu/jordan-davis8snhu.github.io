@@ -85,6 +85,7 @@ _1. Briefly describe the artifact. What is it? When was it created?_
   The original artifact was a project from CS-340 Client/Server Development. The original artifact was a python script that interacted with mongodb through CRUD operations:
   
 ![animalCRUD](https://user-images.githubusercontent.com/73435209/206860424-11ddc750-9821-4b5a-a79b-6ec0de166c36.png)
+![db](https://user-images.githubusercontent.com/73435209/206860552-d7609f7f-4abc-4ab0-a8fe-c3b4f4003143.png)
 
   I took the concept of the CRUD operations and database interaction and expanded on the idea to create something like a password locker. The enhanced artifact is based on the CRUD operations. I have based a new application around them in which the user can store username/password combinations and secure them behind a master password. It functions as a command-line program, which is another enhancement on the original artifact. I created this artifact in the last week as an enhancement of the original project. 
 

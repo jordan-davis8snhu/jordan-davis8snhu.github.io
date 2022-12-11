@@ -1,4 +1,4 @@
-## Professional Self-Assessment
+### Professional Self-Assessment
 
   In completing the Computer Science program I have learned all the skills needed to perform as a competent developer with a 
 thorough understanding of design, data structures, workflow and teamwork principles.  What began as 
@@ -64,14 +64,14 @@ mitigate design flaws, and ensure privacy and enhanced security of data and reso
   _Enhancements 1 and 2_
   
   
-## Original Code
+### Original Code
 [CS340 Project 2 Code](https://github.com/jordan-davis8snhu/CS-340)
-## Code Review
+### Code Review
 [![Code Review](http://img.youtube.com/vi/ZrCT1JraBn8/0.jpg)](http://www.youtube.com/watch?v=ZrCT1JraBn8 "CS499 Capstone Project Code Review")
-## New Artifact
+### New Artifact
 [The New Artifact Code](https://github.com/jordan-davis8snhu/CS499_Pylock) (The same artifact is used for all enhancements)
 
-## Enhancement 1
+### Enhancement 1
 
 _1. Briefly describe the artifact. What is it? When was it created?_
 
@@ -305,7 +305,7 @@ _4. Reflect on the process of enhancing and/or modifying the artifact. What did 
 
 I learned a lot while creating this enhancement. I was able to apply many of the things I have learned about programming and software design throughout the program. I was able to create a much more complex project than what I started with, just beginning with the CRUD operations. I learned how to use the cryptography library and began thinking with a security mindset, which led to many of my design decisions and greatly influenced how I organized the workflow and execution of the project’s functionality. I also learned the value of abstracting variables and organizing functions into classes, directories and files based on intent and functionality. I designed the project with team collaboration, modularity and configuration in mind, and tried to architect the service in a way that it is very obvious to new developers looking at it.
 
-## Enhancement 2
+### Enhancement 2
 
 _1.	Briefly describe the artifact. What is it? When was it created?_
 
@@ -413,7 +413,7 @@ _4.	Reflect on the process of enhancing and/or modifying the artifact. What did 
 
 I learned a lot while creating this enhancement. While the last enhancement allowed me to demonstrate the programming skills I have learned over the course of the program such as OOP, modularity, best practices etc., this enhancement allowed me to display my ability to problem solve and discover solutions to achieve the desired functionality of a project. I was able to research and find the best solution to fit my requirements. Of course, introducing and algorithm affects the execution and architecture of a service, so the challenges I faced involved integrating the functionality with the already existing code base. The code had to be manipulated and heavily reorganized for the algorithm to work properly and effectively.
 
-## Enhancement 3
+### Enhancement 3
 
 _1.	Briefly describe the artifact. What is it? When was it created?_
 
@@ -507,5 +507,5 @@ _4. Reflect on the process of enhancing and/or modifying the artifact. What did 
 
 My last two enhancements demonstrated my ability to code, and in this enhancement, I demonstrated my knowledge of database principles and mysql syntax. In the process of creating this enhancement, I learned a lot about how to analyze and survey an existing project and consider how to integrate new features and services into it. A large part of this enhancement was thinking of how to integrate this functionality smoothly. During this enhancement, I had to do some research into mysql and python interaction, and faced a few challenges with the data structure. There are some further enhancements I could make, but I think the project is in a good place. If I were to work on this further, I would probably convert the project to just be a light mysql wrapper and ignore the file encryption and json writing, but for now I think it works as a good backup storage system.
 
-## Demo
+### Demo
 [![Demo](http://img.youtube.com/vi/wJY2uM3vFR8/0.jpg)](http://www.youtube.com/watch?v=wJY2uM3vFR8  "CS499 Capstone Project Demo")

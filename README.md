@@ -67,7 +67,7 @@ mitigate design flaws, and ensure privacy and enhanced security of data and reso
 ## Original Code
 [CS340 Project 2 Code](https://github.com/jordan-davis8snhu/CS-340)
 ## Code Review
-
+[![Code Review](http://img.youtube.com/vi/ZrCT1JraBn8/0.jpg)](http://www.youtube.com/watch?v=ZrCT1JraBn8 "CS499 Capstone Project Code Review")
 ## New Artifact
 [The New Artifact Code](https://github.com/jordan-davis8snhu/CS499_Pylock) (The same artifact is used for all enhancements)
 

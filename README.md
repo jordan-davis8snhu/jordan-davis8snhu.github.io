@@ -93,7 +93,7 @@ class AnimalShelter(object):
     def create(self, data):
         if data is not None:
             self.database.animals.insert_one(data)  # data should be dictionary
-            print("++++++++++++++++++ animal created successifully+++++++++++++++")
+            print("++++++++++++++++++ animal created successfully+++++++++++++++")
         else:
             raise Exception("Nothing to save, because data parameter is empty")
             
